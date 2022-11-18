@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useWeb3React } from "@web3-react/core";
+import { injected } from "./components/connector";
 
 function App() {
+  const { activate } = useWeb3React();
+
+  const connectMetamask = async () => {
+    try {
+      await activate(injected);
+    } catch (error) {}
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div>
+        <button
+          onClick={connectMetamask}
+          className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded absolute top-1/2 right-1/2"
         >
-          Learn React
-        </a>
-      </header>
+          Connect with Metamask
+        </button>
+      </div>
     </div>
   );
 }
